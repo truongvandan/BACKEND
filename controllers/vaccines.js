@@ -1,7 +1,12 @@
 import { getList, createItem, getItemById, updateItem, deleteItem } from '../services/vaccine.js';
 
 const getVaccines = async (request, response) => {
-    const data = await getList()
+    const {page, limit} = request.query
+    
+    const data = await getList({
+        offset: (page - 1) * limit,
+        limit,
+    })
 
     response.status(200).json(data)
 }
@@ -28,7 +33,7 @@ const createVaccine = async (request, response) => {
 
 const updateVaccine = async (request, response) => {
     const id = request.params.id
-    const item = request.body;
+    const item = request.body
     const data = await getItemById(id)
 
     const updateData = {
@@ -41,7 +46,7 @@ const updateVaccine = async (request, response) => {
 
         response.status(200).json(data)
     } catch(err) {
-        console.log('update err', err)
+        console.log(err)
         response.status(500).send({message: 'Hệ thống xảy ra lỗi, vui lòng liên hệ quản trị viên'})
     }
 }

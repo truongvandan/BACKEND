@@ -3,8 +3,15 @@ import bodyParser from 'body-parser'
 import cors from 'cors'
 
 import { login, register } from './controllers/authentication.js'
+import { getUsers } from './controllers/user.js'
+import { getDiseaseTypes } from './controllers/disease-types.js'
 import { getVaccines, getVaccine, createVaccine, updateVaccine, deleteVaccine } from './controllers/vaccines.js'
+import authMiddleware from './middlewares/auth.js'
+import adminAuthMiddleware from './middlewares/admin-auth.js'
+import { injectionRegister, getInjectionRegisters } from './controllers/injection.js'
+import * as dotenv from 'dotenv'
 
+dotenv.config()
 const app = express()
 const port = 3000
 
@@ -15,9 +22,14 @@ app.use(bodyParser.json())
 
 app.get('/vaccines', getVaccines)
 app.get('/vaccines/:id', getVaccine)
-app.post('/vaccines/create', createVaccine)
-app.put('/vaccines/update/:id', updateVaccine)
-app.delete('/vaccines/:id', deleteVaccine)
+app.post('/vaccines', adminAuthMiddleware, createVaccine)
+app.put('/vaccines/:id', adminAuthMiddleware, updateVaccine)
+app.delete('/vaccines/:id', adminAuthMiddleware, deleteVaccine)
+app.get('/users', adminAuthMiddleware, getUsers)
+
+app.get('/disease-types', authMiddleware, getDiseaseTypes)
+app.post('/injections', authMiddleware, injectionRegister)
+app.get('/injections', authMiddleware, getInjectionRegisters)
 
 app.post('/login', login)
 

@@ -31,7 +31,8 @@ const login = async (request, response) => {
 
         const token = jwt.sign(
             {
-                email: user.email
+                email: user.email,
+                role: user.role
             },
             'key',
             {
@@ -49,6 +50,7 @@ const login = async (request, response) => {
             }
         })
     } catch(err) {
+        console.log(err)
         response.status(500).send({message: 'Hệ thống xảy ra lỗi, vui lòng liên hệ quản trị viên'})
     }
 }
