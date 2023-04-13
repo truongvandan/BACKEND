@@ -9,12 +9,4 @@ const pool = new Pool({
   port: 5432,
 })
 
-// {
-//   user: 'truongvandan',
-//   host: 'dpg-cgs18o8dh87on0pnhjr0-a.singapore-postgres.render.com',
-//   database: 'vaccines_api',
-//   password: '9KGsK9pEVHNVeUJ4eyktDZQW4FeHl4Md',
-//   port: 5432,
-// }
-
 export { pool }

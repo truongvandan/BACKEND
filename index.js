@@ -13,7 +13,7 @@ import * as dotenv from 'dotenv'
 
 dotenv.config()
 const app = express()
-const port = 3000
+const port = process.env.PORT || 80
 
 app.use(cors())
 
