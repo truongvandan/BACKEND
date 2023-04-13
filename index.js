@@ -12,6 +12,7 @@ import { injectionRegister, getInjectionRegisters } from './controllers/injectio
 import * as dotenv from 'dotenv'
 
 dotenv.config()
+console.log('env', JSON.stringify(process.env))
 const app = express()
 const port = process.env.PORT || 80
 
