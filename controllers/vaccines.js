@@ -1,11 +1,15 @@
 import { getList, createItem, getItemById, updateItem, deleteItem } from '../services/vaccine.js';
 
 const getVaccines = async (request, response) => {
-    const {page, limit} = request.query
+    let {page, limit, search} = request.query
+
+    page = page ? page - 1 : 0
+    limit = limit || 10
     
     const data = await getList({
-        offset: (page - 1) * limit,
+        offset: page * limit,
         limit,
+        search
     })
 
     response.status(200).json(data)

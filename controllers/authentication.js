@@ -71,7 +71,7 @@ const register = async (request, response) => {
 
         const encryptPassword = bcrypt.hashSync(password, 8)
 
-        const data = await createUser(email, encryptPassword, name, phoneNumber);
+        const data = await createUser(email, encryptPassword, name, phoneNumber, "user");
 
         response.status(200).json({data: data})
     } catch(err) {

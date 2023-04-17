@@ -1,12 +1,22 @@
 import { pool } from "./index.js"
 
 const getList = async (options = {}) => {
+  let whereClause = '';
+  const searchText = options.search;
+
+  if (searchText) {
+    whereClause = `WHERE vaccine."name" ILIKE '%${searchText}%' OR diseaseType."name" ILIKE '%${searchText}%'`
+  }
+
   const data = await pool.query(`
-    SELECT *
-    FROM "tblVaccines"
+    SELECT vaccine.*
+    FROM "tblVaccines" as vaccine
+    JOIN "tblDiseaseType" as diseaseType
+    ON vaccine."diseaseTypeId" = diseaseType."id"
+    ${whereClause}
     ORDER BY id ASC
-    OFFSET ${options.offset || 0}
-    LIMIT ${options.limit || 20}
+    OFFSET ${options.offset}
+    LIMIT ${options.limit}
   `)
 
   return data.rows;

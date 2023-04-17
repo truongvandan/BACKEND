@@ -1,12 +1,12 @@
-import { getList } from '../services/user.js';
+import { getListForAdmin } from '../services/injection-register.js'
 
-const getUsers = async (request, response) => {
+const getInjectionRegistersForAdmin = async (request, response) => {
     let {page, limit, search} = request.query
 
     page = page ? page - 1 : 0
     limit = limit || 10
     
-    const data = await getList({
+    const data = await getListForAdmin({
         offset: page * limit,
         limit,
         search
@@ -16,5 +16,5 @@ const getUsers = async (request, response) => {
 }
 
 export {
-    getUsers
+    getInjectionRegistersForAdmin,
 }

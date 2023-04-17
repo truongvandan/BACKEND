@@ -1,13 +1,21 @@
-import pg from 'pg';
+import pg from 'pg'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+const {
+  DB_USER,
+  DB_HOST,
+  DB_NAME,
+  DB_PASSWORD,
+} = process.env
 
 const {Pool} = pg
 const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: 5432,
-  ssl: true,
+  user: DB_USER,
+  host: DB_HOST,
+  database: DB_NAME,
+  password: DB_PASSWORD,
 })
 
 export { pool }
