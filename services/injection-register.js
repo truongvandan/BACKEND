@@ -1,9 +1,14 @@
 import { pool } from "./index.js"
 
 const createItem = async (item) => {
+    console.log(`
+      INSERT INTO "tblInjectionRegisters" ("vaccineId", "userId", "injectionDay") 
+      VALUES (${item.vaccineId}, ${item.userId}, '${item.injectionDay}')
+  `)
+
     return pool.query(`
       INSERT INTO "tblInjectionRegisters" ("vaccineId", "userId", "injectionDay") 
-      VALUES ('${item.vaccineId}', '${item.userId}', '${item.injectionDay}')
+      VALUES (${item.vaccineId}, ${item.userId}, '${item.injectionDay}')
     `)
   }
 
@@ -59,10 +64,12 @@ const getItemById = async (id) => {
 }
 
 const updateItem = async (item) => {
+  const updateQueries = Object.keys(item).map((key) => `"${key}"='${item[key]}'`)
+
   return pool.query(`
     UPDATE "tblInjectionRegisters"
     SET 
-      "injectionDay"='${item.injectionDay}'
+      ${updateQueries.join(',')}
     WHERE "id"='${item.id}'
   `)
 }

@@ -37,15 +37,18 @@ const getInjectionRegisters = async (request, response) => {
 const updateInjectionRegister = async (request, response) => {
     const id = request.params.id
     const item = request.body
-    const data = await getItemById(id)
+    // const data = await getItemById(id)
 
-    const updateData = {
-        ...data,
-        ...item,
-    }
+    // const updateData = {
+    //     ...data,
+    //     ...item,
+    // }
 
     try {
-        const data = await updateItem(updateData)
+        const data = await updateItem({
+            ...item,
+            id,
+        })
 
         response.status(200).json(data)
     } catch(err) {

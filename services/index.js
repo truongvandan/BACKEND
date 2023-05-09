@@ -16,7 +16,7 @@ const pool = new Pool({
   host: DB_HOST,
   database: DB_NAME,
   password: DB_PASSWORD,
-  ssl: true,
+  // ssl: true,
 })
 
 export { pool }
