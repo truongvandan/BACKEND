@@ -1,11 +1,6 @@
 import { pool } from "./index.js"
 
 const createItem = async (item) => {
-    console.log(`
-      INSERT INTO "tblInjectionRegisters" ("vaccineId", "userId", "injectionDay") 
-      VALUES (${item.vaccineId}, ${item.userId}, '${item.injectionDay}')
-  `)
-
     return pool.query(`
       INSERT INTO "tblInjectionRegisters" ("vaccineId", "userId", "injectionDay") 
       VALUES (${item.vaccineId}, ${item.userId}, '${item.injectionDay}')

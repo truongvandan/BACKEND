@@ -23,6 +23,7 @@ const getList = async (options = {}) => {
 }
 
 const getItemById = async (id) => {
+  
   const data = await pool.query(`SELECT * FROM "tblVaccines" WHERE "id"='${id}'`)
 
   return data.rows[0];

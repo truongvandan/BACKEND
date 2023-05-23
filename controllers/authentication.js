@@ -56,7 +56,7 @@ const login = async (request, response) => {
 }
 
 const register = async (request, response) => {
-    const { email, password, name, phoneNumber } = request.body;
+    const { email, password, name, phoneNumber, address, birthday } = request.body;
 
     try {
         // Check duplicate email
@@ -71,7 +71,7 @@ const register = async (request, response) => {
 
         const encryptPassword = bcrypt.hashSync(password, 8)
 
-        const data = await createUser(email, encryptPassword, name, phoneNumber, "user");
+        const data = await createUser(email, encryptPassword, name, phoneNumber, address, birthday, "user");
 
         response.status(200).json({data: data})
     } catch(err) {
@@ -83,3 +83,4 @@ export {
     login,
     register
 }
+
