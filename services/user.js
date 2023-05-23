@@ -26,10 +26,10 @@ const findUserByEmail = async (email) => {
   return data.rows[0];
 }
 
-const createUser = async (email, password, name, phoneNumber, role) => {
+const createUser = async (email, password, name, phoneNumber, address, date, role) => {
   console.log('role', role)
-  console.log('query', `INSERT INTO "tblUsers" ("email", "password", "name", "phoneNumber", "role") VALUES ('${email}', '${password}', '${name}', '${phoneNumber}', '${role}')`)
-  return pool.query(`INSERT INTO "tblUsers" ("email", "password", "name", "phoneNumber", "role") VALUES ('${email}', '${password}', '${name}', '${phoneNumber}', '${role}')`)
+  console.log('query', `INSERT INTO "tblUsers" ("email", "password", "name", "phoneNumber", "address", "date", "role") VALUES ('${email}', '${password}', '${name}', '${phoneNumber}', '${address}', '${date}' '${role}')`)
+  return pool.query(`INSERT INTO "tblUsers" ("email", "password", "name", "phoneNumber", "address", "date", "role") VALUES ('${email}', '${password}', '${name}', '${phoneNumber}', '${address}', '${date}' '${role}')`)
 }
 
 
